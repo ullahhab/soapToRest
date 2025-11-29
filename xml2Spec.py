@@ -12,14 +12,13 @@ def xml_to_dict(elem):
         schema["properties"][child.tag] = xml_to_dict(child)
     return schema
 
+def xml_to_tree(xml_path):
+    tree = etree.parse(xml_path)
+    root = tree.getroot()
+    return xml_to_dict(root)
 def xml_to_openapi(xml_request_path, xml_response_path, title="Auto API Spec"):
-    tree = etree.parse(xml_request_path)
-    root = tree.getroot()
-    request_schema = xml_to_dict(root)
-    tree = etree.parse(xml_response_path)
-    root = tree.getroot()
-    response_schema = xml_to_dict(root)
-
+    request_schema = xml_to_tree(xml_request_path)
+    response_schema = xml_to_tree(xml_response_path)
     spec = {
         "openapi": "3.0.3",
         "info": {"title": title, "version": "1.0.0"},
