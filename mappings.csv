@@ -1,0 +1,16 @@
+input_xpath,output_field
+@responseId,ResponseId
+@requestId,RequestId
+@timestamp,Timestamp
+bank:Status/@code,Code
+bank:Status/@message,Message
+bank:Customer/bank:CustomerId,CustomerId
+@type,Type
+@currency,Currency
+bank:AccountNumber,AccountNumber
+bank:Balance,Balance
+bank:LastTransaction/bank:TransactionId,TransactionId
+bank:LastTransaction/bank:Status,Status
+@id,TransactionId
+bank:Status,Status
+bank:ScheduledDate,ScheduledDate
