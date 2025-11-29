@@ -1,0 +1,34 @@
+<BankTransactionResponse >
+    <Status code="200" message="Request processed successfully"/>
+    <Customer>
+        <CustomerId>987654321</CustomerId>
+        <AccountsSummary>
+            <Account type="checking" currency="USD">
+                <AccountNumber>1234567890</AccountNumber>
+                <Balance>1000.50</Balance>
+                <LastTransaction>
+                    <TransactionId>TX1001</TransactionId>
+                    <Status>Scheduled</Status>
+                </LastTransaction>
+            </Account>
+            <Account type="savings" currency="USD">
+                <AccountNumber>0987654321</AccountNumber>
+                <Balance>3079.25</Balance>
+                <LastTransaction>
+                    <TransactionId>TX1002</TransactionId>
+                    <Status>Scheduled</Status>
+                </LastTransaction>
+            </Account>
+        </AccountsSummary>
+    </Customer>
+    <ProcessedTransactions>
+        <Transaction id="TX1001">
+            <Status>Scheduled</Status>
+            <ScheduledDate>2025-12-01</ScheduledDate>
+        </Transaction>
+        <Transaction id="TX1002">
+            <Status>Scheduled</Status>
+            <ScheduledDate>2025-12-05</ScheduledDate>
+        </Transaction>
+    </ProcessedTransactions>
+</BankTransactionResponse>

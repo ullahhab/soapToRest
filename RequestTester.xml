@@ -1,0 +1,50 @@
+<BankTransactionRequest>
+    <Customer>
+        <CustomerId>987654321</CustomerId>
+        <Name>
+            <FirstName>John</FirstName>
+            <LastName>Doe</LastName>
+        </Name>
+        <Contact>
+            <Email>john.doe@example.com</Email>
+            <Phone type="mobile">+15551234567</Phone>
+        </Contact>
+    </Customer>
+    <Accounts>
+        <Account type="checking" currency="USD">
+            <AccountNumber>1234567890</AccountNumber>
+            <Balance>1500.50</Balance>
+        </Account>
+        <Account type="savings" currency="USD">
+            <AccountNumber>0987654321</AccountNumber>
+            <Balance>3200.00</Balance>
+        </Account>
+    </Accounts>
+    <Transactions>
+        <Transaction id="TX1001" type="transfer">
+            <FromAccount>1234567890</FromAccount>
+            <ToAccount>1122334455</ToAccount>
+            <Amount>500.00</Amount>
+            <Currency>USD</Currency>
+            <Schedule>
+                <Date>2025-12-01</Date>
+                <Time>10:30:00</Time>
+                <Recurring frequency="monthly" occurrences="12"/>
+            </Schedule>
+            <Notes>Monthly rent payment</Notes>
+        </Transaction>
+        <Transaction id="TX1002" type="billPayment">
+            <FromAccount>0987654321</FromAccount>
+            <Payee>
+                <Name>Utility Company</Name>
+                <AccountNumber>5566778899</AccountNumber>
+            </Payee>
+            <Amount>120.75</Amount>
+            <Currency>USD</Currency>
+            <Schedule>
+                <Date>2025-12-05</Date>
+            </Schedule>
+            <Notes>Electricity bill</Notes>
+        </Transaction>
+    </Transactions>
+</BankTransactionRequest>

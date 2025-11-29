@@ -12,10 +12,13 @@ def xml_to_dict(elem):
         schema["properties"][child.tag] = xml_to_dict(child)
     return schema
 
-def xml_to_openapi(xml_path, title="Auto API Spec"):
-    tree = etree.parse(xml_path)
+def xml_to_openapi(xml_request_path, xml_response_path, title="Auto API Spec"):
+    tree = etree.parse(xml_request_path)
     root = tree.getroot()
-    schema = xml_to_dict(root)
+    request_schema = xml_to_dict(root)
+    tree = etree.parse(xml_response_path)
+    root = tree.getroot()
+    response_schema = xml_to_dict(root)
 
     spec = {
         "openapi": "3.0.3",
@@ -28,7 +31,7 @@ def xml_to_openapi(xml_path, title="Auto API Spec"):
                         "required": True,
                         "content": {
                             "application/xml": {
-                                "schema": schema
+                                "schema": request_schema
                             }
                         }
                     },
@@ -37,7 +40,7 @@ def xml_to_openapi(xml_path, title="Auto API Spec"):
                             "description": "Success",
                             "content": {
                                 "application/xml": {
-                                    "schema": schema
+                                    "schema": response_schema
                                 }
                             }
                         }
@@ -49,9 +52,5 @@ def xml_to_openapi(xml_path, title="Auto API Spec"):
 
     return json.dumps(spec, indent=2)
 
-file = open("tester.xml", 'r')
-file = file.read()
-print(file)
-
-spec = xml_to_openapi("tester.xml")
+spec = xml_to_openapi("RequestTester.xml", 'ResponseTester.xml')
 print(spec)
