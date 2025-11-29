@@ -2,14 +2,24 @@ from lxml import etree
 import json
 
 def xml_to_dict(elem):
-    """Converts xml to a standard dictionary schema"""
+    """Converts xml to a standard dictionary schema, stripping namespaces."""
+    # Strip namespace if present
+    tag = elem.tag
+    print(tag)
+    if '}' in tag:
+        tag = tag.split('}', 1)[1]
+
     children = list(elem)
     if not children:
-        #print(type(elem).__name__)
         return {"type": "string", "pattern": "^[a-zA-Z0-9]$"}
+
     schema = {"type": "object", "properties": {}}
     for child in children:
-        schema["properties"][child.tag] = xml_to_dict(child)
+        # Recursively process children
+        child_tag = child.tag
+        if '}' in child_tag:
+            child_tag = child_tag.split('}', 1)[1]
+        schema["properties"][child_tag] = xml_to_dict(child)
     return schema
 
 def xml_to_tree(xml_path):
@@ -52,4 +62,4 @@ def xml_to_openapi(xml_request_path, xml_response_path, title="Auto API Spec"):
     return json.dumps(spec, indent=2)
 
 spec = xml_to_openapi("RequestTester.xml", 'ResponseTester.xml')
-print(spec)
+#print(spec)
