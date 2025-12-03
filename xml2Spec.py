@@ -5,7 +5,6 @@ def xml_to_dict(elem):
     """Converts xml to a standard dictionary schema, stripping namespaces."""
     # Strip namespace if present
     tag = elem.tag
-    print(tag)
     if '}' in tag:
         tag = tag.split('}', 1)[1]
 
@@ -15,7 +14,8 @@ def xml_to_dict(elem):
 
     schema = {"type": "object", "properties": {}}
     for child in children:
-        # Recursively process children
+        if isinstance(child, etree.__Comment):
+            continue
         child_tag = child.tag
         if '}' in child_tag:
             child_tag = child_tag.split('}', 1)[1]
